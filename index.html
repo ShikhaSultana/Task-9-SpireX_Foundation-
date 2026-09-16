@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Expense Tracker</title>
+  <meta name="description" content="A web app to add, view, and delete expenses with a live total, built with HTML, CSS, and JavaScript." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+
+  <main class="app">
+    <!-- Header -->
+    <div class="head">
+      <div class="head__title">
+        <div class="head__icon" aria-hidden="true">💰</div>
+        <div>
+          <h1>Expense Tracker</h1>
+          <p>Track your income &amp; spending</p>
+        </div>
+      </div>
+
+      <!-- Day / Night toggle -->
+      <button class="theme-toggle" id="themeToggle" type="button" role="switch" aria-checked="false" aria-label="Toggle day and night mode" title="Toggle day / night mode">
+        <span class="theme-toggle__knob" id="themeKnob" aria-hidden="true">
+          <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4.2" />
+            <path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8L6 18M18 6l1.8-1.8" />
+          </svg>
+        </span>
+      </button>
+    </div>
+
+    <!-- Balance -->
+    <div class="balance">
+      <div class="balance__label">Current Balance</div>
+      <div class="balance__value" id="balance">$0.00</div>
+    </div>
+
+    <!-- Income / Expense split -->
+    <div class="split">
+      <div class="split__box split__box--income">
+        <div class="split__label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 19V5M5 12l7-7 7 7" />
+          </svg>
+          Income
+        </div>
+        <div class="split__value" id="income">$0.00</div>
+      </div>
+      <div class="split__box split__box--expense">
+        <div class="split__label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 5v14M5 12l7 7 7-7" />
+          </svg>
+          Expenses
+        </div>
+        <div class="split__value" id="expense">$0.00</div>
+      </div>
+    </div>
+
+    <!-- Add form -->
+    <form class="form" id="form" autocomplete="off">
+      <div class="field">
+        <label for="name">Description</label>
+        <input type="text" id="name" placeholder="e.g. Groceries, Salary…" maxlength="60" required />
+      </div>
+
+      <div class="form__row">
+        <div class="field">
+          <label for="amount">Amount</label>
+          <input type="number" id="amount" placeholder="0.00" min="0" step="0.01" inputmode="decimal" required />
+        </div>
+        <div class="field">
+          <label for="category">Category</label>
+          <select id="category">
+            <option value="General">General</option>
+            <option value="Food">Food</option>
+            <option value="Transport">Transport</option>
+            <option value="Shopping">Shopping</option>
+            <option value="Bills">Bills</option>
+            <option value="Health">Health</option>
+            <option value="Entertainment">Entertainment</option>
+            <option value="Salary">Salary</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Type</label>
+        <div class="type-toggle" id="typeToggle" role="group" aria-label="Transaction type">
+          <button type="button" data-type="expense" class="active">− Expense</button>
+          <button type="button" data-type="income">+ Income</button>
+        </div>
+      </div>
+
+      <button class="submit" type="submit">Add Transaction</button>
+    </form>
+
+    <!-- History -->
+    <div class="history">
+      <div class="history__head">
+        <h2>History</h2>
+        <button class="clear-btn" id="clearBtn" type="button">Clear all</button>
+      </div>
+      <ul class="list" id="list" aria-label="Transaction history"></ul>
+    </div>
+  </main>
+
+  <!-- Toast -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
